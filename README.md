@@ -1,12 +1,11 @@
 # AIOStreams template by 06Maxx
 
-A template for [AIOStreams](https://github.com/Viren070/AIOStreams) that gives your Stremio stream list a clean, clear, and easy to read layout.
+A custom template for [AIOStreams](https://github.com/Viren070/AIOStreams) that gives your Stremio stream list a clean, clear, and easy to read layout.
 
 ---
 
 ### Preview
-
-<img width="524" height="170" alt="AIOStreams stream selection preview" src="https://github.com/user-attachments/assets/0345c24e-cbcd-46f0-abe0-cbb2ec31bd2a" />
+<img width="700" height="220" alt="firefox 2026-16-05 125540" src="https://github.com/user-attachments/assets/ab5439ed-70e3-466a-a7c9-d10ac52ae09b" />
 
 ---
 
@@ -27,11 +26,12 @@ Displays the debrid service, cache status (⚡ cached / ☁️ uncached), addon 
 Shows stream details including title, quality, file size, indexer, audio, and languages.
 
 ```
-🎬 {stream.seasonEpisode::exists["{stream.seasonEpisode::join(' · ')} · "||""]}{stream.filename::~complete["(Complete) "||""]}{stream.filename::~extended["(Extended) "||""]}{stream.title}{stream.year::exists[" ({stream.year})"||""]}
-🎞️ {stream.filename::~remux["BR REMUX"||"{stream.quality}"]} 🏷️ {stream.visualTags::exists["{stream.visualTags}"||"{stream.encode}"]}
-📦 {stream.size::bytes} 📡 {stream.indexer::exists["{stream.indexer}"||"NA"]}
-🔊 {stream.audioChannels::exists["{stream.audioChannels::join(' · ')} "||""]}{stream.audioTags::exists["{stream.audioTags::join(' · ')}"||"Unknown"]}
+🎬 {stream.seasonEpisode::exists["{stream.seasonEpisode::join(' ')} · "||""]}{stream.filename::~complete["Complete · "||""]}{stream.filename::~extended["Extended · "||""]}{stream.title}{stream.year::exists[" ({stream.year})"||""]}
+🎞️ {stream.quality::exists["{stream.quality::replace('BluRay REMUX','REMUX')}"||"xxx"]}{stream.visualTags::exists[" · {stream.visualTags}"||" · {stream.encode}"]}
+📦 {stream.size::bytes}{stream.bitrate::exists[" · {stream.bitrate::sbitrate}"||""]}
+🔊 {stream.audioChannels::exists["{stream.audioChannels::join(' · ')} "||""]}{stream.audioTags::exists["{stream.audioTags::join(' · ')}"||"Unknown"]} 
 🌍 {stream.languages::exists["{stream.smallLanguageCodes::join(' · ')::replace('ᴅᴜᴀʟ ᴀᴜᴅɪᴏ','ᴅᴜᴏ')::replace('ᴅᴜʙʙᴇᴅ','ᴅᴜʙ')}"||"ᴏʀɪɢɪɴᴀʟ"]}
+{stream.editions}
 ```
 
 ### Each template can also be altered to your specific requirements!
@@ -43,8 +43,7 @@ Shows stream details including title, quality, file size, indexer, audio, and la
 | Icon | Field | Description |
 |------|-------|-------------|
 | 🎬 | Title | Season/episode, special edition flags, title, and year |
-| 🎞️ | Quality | BR REMUX label or quality string, plus visual tags/encode |
-| 📦 | Size | File size in human-readable bytes |
-| 📡 | Indexer | Source indexer, falls back to `NA` |
+| 🎞️ | Quality | REMUX label or quality string, plus visual tags/encode |
+| 📦 | Size | File size in human-readable bytes + bitrate in Mbps|
 | 🔊 | Audio | Channel layout and audio format tags |
 | 🌍 | Languages | Language codes; falls back to `ᴏʀɪɢɪɴᴀʟ` |
